@@ -10644,3 +10644,25 @@ a.text-dark:focus {
   }
 }
 
+.channel-avatar {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #eee;
+  position: relative;
+  cursor: pointer;
+}
+
+.channel-avatar .channel-avatar-overlay {
+  display: none;
+}
+
+.channel-avatar:hover .channel-avatar-overlay {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
