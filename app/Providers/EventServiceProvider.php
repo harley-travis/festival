@@ -2,7 +2,7 @@
 
 namespace FilmFest\Providers;
 
-use FilmFest\Listeners\CreateUserChannel;
+use FilmFest\Listeners\Users\CreateUserChannel;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
