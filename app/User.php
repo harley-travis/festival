@@ -1,7 +1,8 @@
 <?php
 
-namespace App;
+namespace FilmFest;
 
+use Illuminate\Support\Str;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -9,6 +10,22 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
+
+
+    public $incrementing = false;
+
+    protected static function boot() {
+        parent::boot();
+
+        static::creating(function($model) {
+            $model->{$model->getKeyName()} = (string) Str::uuid();
+        });
+    }
+
+    public function channel() {
+        return $this->hasOne(Channel::class);
+    }
+
 
     /**
      * The attributes that are mass assignable.
