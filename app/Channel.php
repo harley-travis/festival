@@ -18,11 +18,17 @@ class Channel extends Model implements HasMedia {
     public function image() {
         // retrive the channel image
 
-        if( $this->media->first() ){
-            return $this->media->first()->getFullUrl('thumb');
-        }
-        
-        return null;
+        // this is working for localhost. comment out when you go live! 
+        $Fan = $this->getFirstMediaUrl('images', 'thumb');         
+        $Tan = str_replace("http://localhost","","$Fan");        
+        return $Tan; 
+
+        // this the live code. not sure why it's not working
+        // if( $this->media->first() ){
+        //     return $this->media->first()->getFullUrl('thumb');
+        // }
+
+        // return null;
     }
 
     public function registerMediaConversions(?Media $media = null) {
