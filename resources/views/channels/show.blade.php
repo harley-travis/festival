@@ -19,6 +19,7 @@
                                 <div onclick="document.getElementById('image').click()" class="channel-avatar-overlay">
                                     <!-- insert image here -->
                                 </div>
+                                <img src="{{ $channel->image() }}" alt="">
                             </div>
                         </div>
 

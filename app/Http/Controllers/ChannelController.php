@@ -66,9 +66,20 @@ class ChannelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, Channel $channel) {
+        
+        // upload the image using the Spatie/laravel-medialibrary pkg
+        if($request->hasFile('image')) {
+
+            // clear the images from this collection then upload a new one
+            $channel->clearMediaCollection('images');
+
+            // upload new image
+            $channel->addMediaFromRequest('image')->toMediaCollection('images');
+        }
+
+        return redirect()->back();
+
     }
 
     /**
