@@ -83,5 +83,21 @@
             @yield('content')
         </main>
     </div>
+
+    <script>
+        window.AuthUser = '{!! auth()->user() !!}'
+
+        // check to see if the user is logged in
+        window.__auth = function () {
+
+            try {
+                return JSON.parse(AuthUser)
+            } catch(error) {
+                return null
+            }
+
+        }
+    </script>
+
 </body>
 </html>

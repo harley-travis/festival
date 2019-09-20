@@ -2,11 +2,18 @@
 
 namespace FilmFest\Http\Controllers;
 
+use FilmFest\Http\Requests\Channels\UpdateChannelRequest;
 use FilmFest\Channel;
 use Illuminate\Http\Request;
 
-class ChannelController extends Controller
-{
+class ChannelController extends Controller {
+
+    public function __construct() {
+        // if a user who is not logged in tries to make admin changes, redirect them to the login page
+        $this->middleware(['auth'])->only('update');
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -66,7 +73,7 @@ class ChannelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Channel $channel) {
+    public function update(UpdateChannelRequest $request, Channel $channel) {
         
         // upload the image using the Spatie/laravel-medialibrary pkg
         if($request->hasFile('image')) {
@@ -77,6 +84,14 @@ class ChannelController extends Controller
             // upload new image
             $channel->addMediaFromRequest('image')->toMediaCollection('images');
         }
+
+
+        $channel->update([
+            'name' => $request->name,
+            'description' => $request->description,
+        ]);
+
+
 
         return redirect()->back();
 

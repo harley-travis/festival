@@ -1,5 +1,8 @@
 <?php
 
+use FilmFest\User;
+use FilmFest\Channel;
+use FilmFest\Subscription;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
@@ -13,13 +16,38 @@ class DatabaseSeeder extends Seeder
     public function run() {
         // $this->call(UsersTableSeeder::class);
 
-        DB::table('users')->insert([
-            'id' => 'a9c9e1ad-a496-4653-b71f-746946490d50',
-            'name' => 'Tony Stark',
+        $user1 = factory(User::class)->create([
+            'name' =>'Tony Stark',
             'email' =>'tony@gmail.com',
-            'password' => bcrypt('test'),
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
+        ]);
+
+        $user2 = factory(User::class)->create([
+            'name' =>'Peter Parker',
+            'email' =>'peter@gmail.com',
+        ]);
+
+        $channel1 = factory(Channel::class)->create([
+            'user_id' => $user1->id
+        ]);
+
+        $channel2 = factory(Channel::class)->create([
+            'user_id' => $user2->id
+        ]);
+
+        $channel1->subscriptions()->create([
+            'user_id' =>$user2->id
+        ]);
+
+        $channel2->subscriptions()->create([
+            'user_id' =>$user1->id
+        ]);
+
+        factory(Subscription::class, 10000)->create([
+            'channel_id' => $channel1->id
+        ]);
+
+        factory(Subscription::class, 10000)->create([
+            'channel_id' => $channel2->id
         ]);
 
     }
