@@ -28,9 +28,7 @@
                                 @if( $channel->editable() )
 
                                 <div onclick="document.getElementById('image').click()" class="channel-avatar-overlay">
-                                    
-                                        <!-- insert image here -->
-                                    
+                                    <i class="fas fa-upload"></i>
                                 </div>
 
                                 @endif

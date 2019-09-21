@@ -10666,3 +10666,7 @@ a.text-dark:focus {
   background-color: rgba(0, 0, 0, 0.4);
 }
 
+.upload-icon {
+  font-size: 35px;
+}
+
